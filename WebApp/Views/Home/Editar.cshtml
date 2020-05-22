@@ -1,0 +1,82 @@
+﻿@model Models.Material
+<br />
+
+@{
+    /**/
+
+    Layout = null;
+}
+
+@using (Html.BeginForm("Material", "material", FormMethod.Post, new { id = "ActualizarMaterialForm", name = "ActualizarMaterialForm", @class = "form-horizontal", onsubmit = "return false" }))
+{
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", maxlength = "150" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                <div class="text-danger field-validation-error" id="nomusudupli"></div>
+            </div>
+
+            <label class="control-label col-md-2">Familia</label>
+            <div class="col-md-4">
+                <select class="form-control" id="familiasDropdown" name="familiasDropdown"></select>
+            </div>
+
+            <label class="control-label col-md-2">Unidad Almacén</label>
+            <div class="col-md-4">
+                <select class="form-control" id="almacenDropdown" name="almacenDropdown"></select>
+            </div>
+
+            <label class="control-label col-md-2">Unidad Compra</label>
+            <div class="col-md-4">
+                <select class="form-control" id="compraDropdown" name="compraDropdown"></select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Pares X</label>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.PiezasUnidad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PiezasUnidad, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.Costo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Costo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Costo, "", new { @class = "text-danger" })
+            </div>
+
+            <label class="control-label col-md-2">Tipo Material</label>
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.TipoMaterialId,
+                    new SelectList(new[]{
+                    new SelectListItem{ Text="", Value=""},
+                                new SelectListItem{Text = "Directo", Value="1"},
+                                new SelectListItem{Text = "Indirecto", Value="2"}},
+                "Value", "Text"), new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.TipoMaterialId, "", new { @class = "text-danger" })
+            </div>
+
+            <label class="control-label col-md-2">Estado</label>
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.EstatusId,
+                    new SelectList(new[]{
+                    new SelectListItem{ Text="", Value=""},
+                                new SelectListItem{Text = "Activo", Value="1"},
+                                new SelectListItem{Text = "Inactivo", Value="2"}},
+                "Value", "Text"), new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.EstatusId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+
+    @Html.HiddenFor(model => model.FamiliaId, new { id = "ddFamId" })
+    @Html.HiddenFor(model => model.UnidadAlmacenId, new { id = "ddAlmId" })
+    @Html.HiddenFor(model => model.UnidadCompraId, new { id = "ddComId" })
+    @Html.HiddenFor(model => model.MaterialId, new { id = "MatId" })
+    <script src="~/Scripts/ViewScript/ModalViews/Editar.js"></script>
+}
