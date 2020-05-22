@@ -15,9 +15,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", maxlength = "150" } })
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
                 @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-                <div class="text-danger field-validation-error" id="nomusudupli"></div>
             </div>
 
             <label class="control-label col-md-2">Familia</label>
@@ -42,6 +41,7 @@
                 @Html.EditorFor(model => model.PiezasUnidad, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PiezasUnidad, "", new { @class = "text-danger" })
             </div>
+            <span id="errmsg"></span>
 
             @Html.LabelFor(model => model.Costo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
@@ -53,7 +53,7 @@
             <div class="col-md-4">
                 @Html.DropDownListFor(model => model.TipoMaterialId,
                     new SelectList(new[]{
-                    new SelectListItem{ Text="", Value=""},
+                    new SelectListItem{ Text = "Seleccione el Tipo de Material", Value="-1" },
                                 new SelectListItem{Text = "Directo", Value="1"},
                                 new SelectListItem{Text = "Indirecto", Value="2"}},
                 "Value", "Text"), new { @class = "form-control", required = "required" })
@@ -64,7 +64,7 @@
             <div class="col-md-4">
                 @Html.DropDownListFor(model => model.EstatusId,
                     new SelectList(new[]{
-                    new SelectListItem{ Text="", Value=""},
+                    new SelectListItem{ Text = "Seleccione el Estatus", Value="-1" },
                                 new SelectListItem{Text = "Activo", Value="1"},
                                 new SelectListItem{Text = "Inactivo", Value="2"}},
                 "Value", "Text"), new { @class = "form-control", required = "required" })
