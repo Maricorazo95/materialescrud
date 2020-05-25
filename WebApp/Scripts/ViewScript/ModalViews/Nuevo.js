@@ -6,7 +6,7 @@
     });
     $("#Costo").keydown(function (evt) {
         var theNum = $("#Costo").val();
-        var formatLine = theNum.match(/^\d+(\.\d{1,2})?$/);;
+        var formatLine = theNum.match(/^\d+(\.\d{1,2})?$/);
         console.log(formatLine);
         if (!formatLine)
             alert("Ingrese un Número valido");
@@ -80,11 +80,18 @@
         var campo_costo = $("#Costo").val().trim();
 
         //si esta vacio lanza error
-        if (campo_nombre.length == 0 ||
-            campo_costo.length == 0 ||
-            campo_punidad.length == 0) {
-            alert("No puede haber campos vacios");
+        if (campo_nombre.length == 0 ) {
+            alert("Complete el Campo Nombre");
             return;
+        }
+
+        if (campo_costo.length == 0) {
+            alert("complete el Campo Costo");
+            return;
+        }
+
+        if (campo_punidad.length == 0) {
+            alert("Complete el Campo Pares X")
         }
 
         if ($('#ddFamId').val() < 1) {
